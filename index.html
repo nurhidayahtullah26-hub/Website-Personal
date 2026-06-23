@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logbook Kegiatan - RHK</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+
+    <div class="bg-orb bg-orb-1"></div>
+    <div class="bg-orb bg-orb-2"></div>
+    <div class="bg-orb bg-orb-3"></div>
+
+    <!-- ======================== HALAMAN 1: FORM ======================== -->
+    <div id="pageForm" class="page active">
+        <div class="container">
+            <header>
+                <div class="header-badge">RHK</div>
+                <h1>LOGBOOK KEGIATAN</h1>
+                <p class="subtitle">Rencana Hasil Kerja</p>
+            </header>
+
+            <div class="form-card">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="fNama">1. Nama</label>
+                        <input type="text" id="fNama" placeholder="Masukkan nama lengkap..." autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="fNip">2. NIP</label>
+                        <input type="text" id="fNip" placeholder="Masukkan NIP..." autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="fPangkat">3. Pangkat / Golongan Ruang</label>
+                        <input type="text" id="fPangkat" placeholder="Contoh: Penata Tk. I / III/d" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="fJabatan">4. Jabatan</label>
+                        <input type="text" id="fJabatan" placeholder="Masukkan jabatan..." autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="fUnitKerja">5. Unit Kerja</label>
+                        <input type="text" id="fUnitKerja" placeholder="Masukkan unit kerja..." autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="fUnitOrg">6. Unit Organisasi</label>
+                        <input type="text" id="fUnitOrg" placeholder="Masukkan unit organisasi..." autocomplete="off">
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="fRencanaHasil">7. Rencana Hasil Kerja</label>
+                        <textarea id="fRencanaHasil" rows="2" placeholder="Tuliskan rencana hasil kerja..."></textarea>
+                    </div>
+                    <div class="form-group form-full">
+                        <label for="fRencanaAksi">8. Rencana Aksi</label>
+                        <textarea id="fRencanaAksi" rows="2" placeholder="Tuliskan rencana aksi..."></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="fBulanRealisasi">9. Bulan Realisasi Kinerja</label>
+                        <input type="text" id="fBulanRealisasi" placeholder="Contoh: Januari 2025" autocomplete="off">
+                    </div>
+                    <div class="form-group">
+                        <label for="fRealisasi">10. Realisasi Kinerja</label>
+                        <input type="text" id="fRealisasi" placeholder="Masukkan realisasi kinerja..." autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="form-divider">
+                    <span>Pilih RHK yang ingin dibuka</span>
+                </div>
+
+                <div class="rhk-grid" id="rhkGrid"></div>
+
+                <p id="formError" class="form-error" style="display:none;"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ======================== HALAMAN 2: LOGBOOK ======================== -->
+    <div id="pageLogbook" class="page">
+        <div class="container">
+            <div class="top-nav">
+                <button id="btnBack" class="btn btn-back" type="button">
+                    <i class="fas fa-arrow-left"></i> Kembali
+                </button>
+                <div class="rhk-tabs" id="rhkTabs"></div>
+            </div>
+
+            <div class="page-info" id="pageInfo"></div>
+
+            <div class="controls">
+                <div class="control-left">
+                    <button id="btnAddRow" class="btn btn-add" type="button">
+                        <i class="fas fa-plus"></i> Tambah Baris
+                    </button>
+                </div>
+                <div class="control-right">
+                    <button id="btnDelete" class="btn btn-danger" type="button">
+                        <i class="fas fa-trash-alt"></i> Hapus Semua
+                    </button>
+                    <button id="btnExportWord" class="btn btn-word" type="button">
+                        <i class="fas fa-file-word"></i> Export Word
+                    </button>
+                </div>
+            </div>
+
+            <div class="table-wrapper" id="tableWrapper">
+                <table id="logbookTable">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Hari / Tanggal</th>
+                            <th>Kegiatan</th>
+                            <th>Uraian Kegiatan</th>
+                            <th>Bukti Dukung</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody"></tbody>
+                </table>
+                <div id="emptyState" class="empty-state" style="display:none;">
+                    <i class="fas fa-clipboard-list"></i>
+                    <p>Klik "Tambah Baris" untuk memulai</p>
+                </div>
+            </div>
+
+            <div class="bottom-nav">
+                <button id="btnPrev" class="btn btn-nav" type="button">
+                    <i class="fas fa-chevron-left"></i> RHK Sebelumnya
+                </button>
+                <span class="nav-indicator" id="navIndicator"></span>
+                <button id="btnNext" class="btn btn-nav" type="button">
+                    RHK Selanjutnya <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Pilih Tanggal Sederhana -->
+    <div id="datePicker" class="date-picker">
+        <div class="dp-simple">
+            <div class="dp-row">
+                <label>Tanggal</label>
+                <select id="dpDay"></select>
+            </div>
+            <div class="dp-row">
+                <label>Bulan</label>
+                <select id="dpMonth"></select>
+            </div>
+            <div class="dp-row">
+                <label>Tahun</label>
+                <select id="dpYear"></select>
+            </div>
+            <div class="dp-preview" id="dpPreview">-</div>
+            <button id="dpOk" type="button" class="dp-ok-btn">Pilih</button>
+        </div>
+    </div>
+
+    <!-- Lightbox -->
+    <div id="lightbox" class="lightbox">
+        <button class="lb-close" id="lbClose" type="button">&times;</button>
+        <img id="lbImg" src="" alt="Preview">
+    </div>
+
+    <input type="file" id="imageInput" accept="image/*" multiple hidden>
+
+    <script src="script.js"></script>
+</body>
+</html>
